@@ -7,7 +7,7 @@ const PATHS = {
 };
 
 module.exports = {
-  entry: PATHS.source + '/index.js',
+  entry: PATHS.source + '/view/index.js',
   output: {
     path: PATHS.build,
     filename: 'bundle.js'
@@ -18,9 +18,17 @@ module.exports = {
     })
   ],
   module: {
-    loaders: [
-      { test: path.join(__dirname, PATHS.source),
-        loader: 'babel-loader' }
+    rules: [
+      {
+        test: /\.js$/,
+        exclude: /(node_modules|bower_components)/,
+        use: {
+          loader: 'babel-loader',
+          options: {
+            plugins: ['transform-es2015-destructuring', 'transform-object-rest-spread']
+          }
+        }
+      }
     ]
   }
 };

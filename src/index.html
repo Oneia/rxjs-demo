@@ -6,16 +6,29 @@
     <style>
       body {
         margin: 0;
+        width: 100vw;
+        height: 100vh;
+      }
+      .flex {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
       }
     </style>
   </head>
   <body style="margin: 0">
-    <div>
-      <button id="plus">plus</button>
-      <button id="minus">minus</button>
+    <div class="flex">
+      <div class="left">
+        <div>
+          <button id="plus">plus</button>
+          <button id="minus">minus</button>
+        </div>
+        <div id="result">
+      </div>
     </div>
-  <div id="result">
-
+    <div class="right">
+      <button id="toggle"></button>
+    </div>
   </div>
   </body>
 </html>

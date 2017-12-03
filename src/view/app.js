@@ -1,17 +1,24 @@
 import * as Rxjs from 'rxjs';
 
-class App {
+import { DataService } from '../sevices/service';
+import * as Constants from '../sevices/constants';
+import { UtilsService } from '../sevices/utils';
+
+export class App {
   constructor() {
     this.initInternal();
   }
   
   initInternal() {
-    this.count = 1;
+    this.service = new DataService();
+    this.service.state
+      .filter(() => !!this.result)
+      .subscribe(res => this.updateCount(res.count));
 
-    this.plus = this.loadElement('plus');
-    this.minus = this.loadElement('minus');
+    this.plus = UtilsService.loadElement('plus');
+    this.minus = UtilsService.loadElement('minus');
 
-    this.decrease();
+    this.result = UtilsService.loadElement('result');
 
     /*
       Plus action
@@ -23,7 +30,7 @@ class App {
         Rxjs.Observable.fromEvent(document, 'keydown')
           .filter(event => event.keyCode === 187)
           .startWith(true))
-      .subscribe(() => this.increase());
+      .subscribe(() => this.service.setCountState('decrease'));
 
     /*
       Minus action
@@ -35,20 +42,10 @@ class App {
           .startWith(true),
         Rxjs.Observable.fromEvent(this.minus, 'click')
           .startWith(true))
-      .subscribe(() => this.decrease());
+      .subscribe(() => this.service.setCountState(Constants.INCREASE));
   }
 
-  increase() {
-    this.loadElement('result').innerText = `Result ${++this.count}`;
-  }
-
-  decrease() {
-    this.loadElement('result').innerText = `Result ${--this.count}`;
-  }
-  
-  loadElement(id) {
-    return document.getElementById(id);
+  updateCount(res) {
+    this.result.innerText = `Result ${res}`;
   }
 }
-
-new App();
