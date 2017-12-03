@@ -13,19 +13,17 @@ export class Sidebar {
 
     this.body = document.body;
     this.toggle = UtilsService.loadElement('toggle');
-
-    this.showPage = true;
     
     this.service.state
-      .subscribe(({showPage}) => this.toggleStatusShowPage(!this.showPage));
+      .subscribe(({showPage}) => this.toggleStatusShowPage(showPage));
 
     Rxjs.Observable.fromEvent(this.toggle, 'click')
-      .subscribe(() => this.service.setPageState(!!this.showPage ))
+      .subscribe(() => this.service.setPageState(!this.showPage ))
   }
 
   toggleStatusShowPage(val) {
     this.showPage = val;
-    this.body.style.backgroundColor = val ? 'rgba(0, 0, 0, .3)' : '#fff';
-    this.toggle.innerText = val ? 'off' : 'on';
+    this.body.style.backgroundColor = val && 'rgba(0, 0, 0, .3)' || '#fff';
+    this.toggle.innerText = val && 'off' || 'on';
   }
 }

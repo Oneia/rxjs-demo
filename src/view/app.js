@@ -28,7 +28,7 @@ export class App {
         Rxjs.Observable.fromEvent(this.plus, 'click')
           .startWith(true),
         Rxjs.Observable.fromEvent(document, 'keydown')
-          .filter(event => event.keyCode === 187)
+          .filter(event => event.keyCode === 187 || event.keyCode === 109)
           .startWith(true))
       .subscribe(() => this.service.setCountState('decrease'));
 
@@ -38,7 +38,7 @@ export class App {
     Rxjs.Observable
       .combineLatest(
         Rxjs.Observable.fromEvent(document, 'keydown')
-          .filter(event => event.keyCode === 189)
+          .filter(event => event.keyCode === 189 || event.keyCode === 107)
           .startWith(true),
         Rxjs.Observable.fromEvent(this.minus, 'click')
           .startWith(true))
