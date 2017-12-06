@@ -1,6 +1,6 @@
 import * as Rxjs from 'rxjs';
 
-import {DataService} from '../sevices/service';
+import service from '../sevices/service';
 import {UtilsService} from '../sevices/utils';
 
 export class Sidebar {
@@ -9,7 +9,8 @@ export class Sidebar {
   }
 
   initInternal() {
-    this.service = new DataService();
+    this.service = service;
+    console.log(service);
 
     this.body = document.body;
     this.toggle = UtilsService.loadElement('toggle');

@@ -7,7 +7,7 @@ const initState = {
   count: 0,
 };
 
-export class DataService {
+class DataService {
   constructor() {
 
     this.init();
@@ -15,6 +15,10 @@ export class DataService {
 
   init() {
     this._state = new BehaviorSubject(initState);
+    // this.test = new Subject()
+    // this.test.next('tr');
+    //
+    // this.test.subscribe((res) => console.log(res));
   }
 
   setPageState(val) {
@@ -39,3 +43,5 @@ export class DataService {
     return this._state.asObservable();
   }
 }
+
+export default new DataService();
